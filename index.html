@@ -8,6 +8,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/default.css" rel="stylesheet">
     <script src="js/angular.min.js"></script>
+    <script src="js/treeee.js"></script>
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -26,7 +27,8 @@
 
     <!-- Main Content -->
     <div class="container">
-      <div class="tree">
+      <div class="tree" ng-controller="TreeCtrl">
+        <div class="node" ng-repeat="node in tree.branches">{{node.content}}</div>
         <input type="text" class="form-control" autofocus
                 placeholder="write something"/>
       </div>
