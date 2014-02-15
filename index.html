@@ -27,11 +27,15 @@
 
     <!-- Main Content -->
     <div class="container">
-      <div class="tree" ng-controller="TreeCtrl">
-        <div class="node" ng-repeat="node in tree.branches">{{node.content}}</div>
-        <input type="text" class="form-control" autofocus
-                placeholder="write something"/>
-      </div>
+      <ul class="list-group tree" ng-controller="TreeCtrl">
+        <li class="list-group-item node" ng-repeat="node in tree.branches">
+          {{node.content}}
+        </li>
+        <li class="list-group-item">
+          <input type="text" class="form-control" autofocus
+                  placeholder="write something"/>
+        </li>
+      </ul>
     </div>
 
     <!-- JavaScript -->
