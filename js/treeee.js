@@ -20,10 +20,8 @@ var TreeCtrl = function($scope) {
             return;
         }
 
-        // app new content to tree
+        // add new content to tree
         $scope.tree.append(new Node($scope.newContent));
-
-        // reset new content string
         $scope.newContent = "";
     };
 };
