@@ -10,6 +10,14 @@ var TreeCtrl = function($scope) {
         $scope.tree.append(new Node($scope.newContent));
         $scope.newContent = "";
     };
+
+    $scope.startEditing = function() {
+        console.log("start editing");
+    };
+
+    $scope.stopEditing = function() {
+        console.log("stop editing");
+    };
 };
 
 // Node class
