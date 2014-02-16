@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="app">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,7 +35,7 @@
           <input type="text" class="form-control" autofocus
                  ng-model="newContent"
                  placeholder="Add new item"
-                 ng-keypress="appendNode($event)"/>
+                 ng-enter="appendNode()"/>
         </li>
       </ul>
     </div>

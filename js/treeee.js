@@ -1,3 +1,34 @@
+// Derectives
+
+var app = angular.module("app", []);
+
+app.directive('ngEnter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if(event.which === 13) {
+                scope.$apply(function (){
+                    scope.$eval(attrs.ngEnter);
+                });
+                event.preventDefault();
+            }
+        });
+    };
+});
+
+// Controllers
+
+var TreeCtrl = function($scope) {
+    $scope.tree = new Node();
+    $scope.newContent = "";
+
+    $scope.appendNode = function() {
+        $scope.tree.append(new Node($scope.newContent));
+        $scope.newContent = "";
+    };
+};
+
+// Node class
+
 var Node = function(content) {
     this.branches = [];
     if (content) {
@@ -7,21 +38,4 @@ var Node = function(content) {
 
 Node.prototype.append = function(node) {
     this.branches.push(node);
-};
-
-
-var TreeCtrl = function($scope) {
-    $scope.tree = new Node();
-    $scope.newContent = "";
-
-    $scope.appendNode = function(ev) {
-        // return if event is not Enter key
-        if (ev.which != 13) {
-            return;
-        }
-
-        // add new content to tree
-        $scope.tree.append(new Node($scope.newContent));
-        $scope.newContent = "";
-    };
 };
