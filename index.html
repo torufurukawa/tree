@@ -37,11 +37,12 @@
           {{node.content}}
         </li>
         <li class="list-group-item">
-          <input type="text" class="form-control" autofocus
+          <input type="text" class="form-control"
                  ng-model="newContent" placeholder="Add new item"
                  ui-keypress="{enter:'appendNode()'}"
                  ui-keyup="{esc:'stopEditing()'}"
-                 ng-focus="startEditing()"/>
+                 ng-focus="startEditing()"
+                 tr-focus-me="activeNode==-1" />
         </li>
       </ul>
     </div>
