@@ -1,31 +1,40 @@
-// Derectives
+// Directives
 
-var app = angular.module("app", []);
+var app = angular.module("app", ['ui.keypress']);
 
-app.directive('ngEnter', function () {
-    return function (scope, element, attrs) {
-        element.bind("keydown keypress", function (event) {
-            if(event.which === 13) {
-                scope.$apply(function (){
-                    scope.$eval(attrs.ngEnter);
-                });
-                event.preventDefault();
-            }
-        });
+var app = angular.module("app", ['ui.keypress']).
+  directive('trFocusMe', [function() {
+    return function(scope, elements, attrs) {
+      console.log(scope);
+      console.log(attrs);
+      elements[0].focus();
     };
-});
+  }]);
+
 
 // Controllers
 
 var TreeCtrl = function($scope) {
     $scope.tree = new Node();
     $scope.newContent = "";
+    $scope.activeNode = -1;
 
     $scope.appendNode = function() {
         $scope.tree.append(new Node($scope.newContent));
         $scope.newContent = "";
     };
+
+    $scope.startEditing = function() {
+        console.log("start editing");
+    };
+
+    $scope.stopEditing = function() {
+        console.log("stop editing");
+        // blur
+        // activate last item
+    };
 };
+
 
 // Node class
 
