@@ -1,50 +1,27 @@
-// Directives
+// Application module
 
-var app = angular.module("app", ['ui.keypress']);
-
-var app = angular.module("app", ['ui.keypress']).
-  directive('trFocusMe', [function() {
-    return function(scope, elements, attrs) {
-      console.log(scope);
-      console.log(attrs);
-      elements[0].focus();
-    };
-  }]);
+var app = angular.module("app", ['ui.keypress', 'ui.sortable']);
 
 
-// Controllers
+// Controller
 
 var TreeCtrl = function($scope) {
-    $scope.tree = new Node();
-    $scope.newContent = "";
-    $scope.activeNode = -1;
+  $scope.items = [];
+  $scope.newContent = "";
+  $scope.activeNode = -1;
 
-    $scope.appendNode = function() {
-        $scope.tree.append(new Node($scope.newContent));
-        $scope.newContent = "";
-    };
-
-    $scope.startEditing = function() {
-        console.log("start editing");
-    };
-
-    $scope.stopEditing = function() {
-        console.log("stop editing");
-        // blur
-        // activate last item
-    };
-};
-
-
-// Node class
-
-var Node = function(content) {
-    this.branches = [];
-    if (content) {
-        this.content = content;
+  $scope.addItem = function() {
+    if ($scope.newContent) {
+      $scope.items.push($scope.newContent);
+      $scope.newContent = "";
     }
-};
+  };
 
-Node.prototype.append = function(node) {
-    this.branches.push(node);
+  $scope.startEditing = function(item) {
+    console.log(item);
+  };
+
+  $scope.removeItem = function(idx) {
+    $scope.items.splice(idx, 1);
+  };
 };

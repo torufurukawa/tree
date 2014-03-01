@@ -7,13 +7,22 @@
     <title>Treeee</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/default.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+
     <!-- Angular -->
     <script src="js/angular.min.js"></script>
     <script src="js/ui-utils.js"></script>
     <script src="js/event.js"></script>
     <script src="js/keypress.js"></script>
+    <script src="js/sortable.js"></script>
+
     <!-- Treeee specific -->
     <script src="js/treeee.js"></script>
+
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -31,24 +40,32 @@
     </div>
 
     <!-- Main Content -->
-    <div class="container">
-      <ul class="list-group tree" ng-controller="TreeCtrl">
-        <li class="list-group-item node" ng-repeat="node in tree.branches">
-          {{node.content}}
+    <div class="container" ng-controller="TreeCtrl">
+
+      <!-- items -->
+      <ul class="list-group tree" ui-sortable ng-model="items">
+        <li class="list-group-item node" ng-repeat="item in items">
+          <div class="row">
+            <div class="col-xs-11" ng-dblclick="startEditing(item)">
+              {{item}}
+            </div>
+            <div class="col-xs-1">
+              <span class="glyphicon glyphicon-remove-circle"
+                    ng-click="removeItem($index)"></span>
+            </div>
+          </div>
         </li>
+      </ul>
+
+      <!-- new item -->
+      <ul class="list-group">
         <li class="list-group-item">
-          <input type="text" class="form-control"
+          <input type="text" class="form-control" autofocus
                  ng-model="newContent" placeholder="Add new item"
-                 ui-keypress="{enter:'appendNode()'}"
-                 ui-keyup="{esc:'stopEditing()'}"
-                 ng-focus="startEditing()"
-                 tr-focus-me="activeNode==-1" />
+                 ui-keypress="{enter:'addItem()'}" />
         </li>
       </ul>
     </div>
 
-    <!-- JavaScript -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
