@@ -20,7 +20,10 @@ var TreeCtrl = function($scope) {
 
   $scope.startEditing = function(item) {
     item.isBeingEdited = true;
-    console.log(item);
+  };
+
+  $scope.finishEditing = function(item) {
+    item.isBeingEdited = false;
   };
 
   $scope.removeItem = function(idx) {
