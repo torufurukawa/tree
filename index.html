@@ -44,9 +44,7 @@
 
       <!-- items -->
       <ul class="list-group tree" ui-sortable ng-model="items">
-        <li class="list-group-item node" ng-repeat="item in items">
-          <div class="row">
-
+        <li class="list-group-item node row item-row" ng-repeat="item in items">
             <!-- item content -->
             <div class="col-xs-11">
               <span ng-dblclick="startEditing(item)"
@@ -62,10 +60,9 @@
 
             <!-- trash button -->
             <div class="col-xs-1">
-              <span class="glyphicon glyphicon-trash"
+              <span class="glyphicon glyphicon-trash trash-button"
                     ng-click="removeItem($index)"></span>
             </div>
-          </div>
         </li>
       </ul>
 

@@ -3,11 +3,18 @@ body {
 }
 
 .tree {
-    margin-top: 1.5em;
+  margin-top: 1.5em;
 }
 
-.vcenter {
-    display: inline-block;
-    vertical-align: middle;
-    float: none;
+.item-row:hover {
+  background: #fcf8e3;
+}
+
+.trash-button {
+  visibility: hidden;
+}
+
+.item-row:hover .trash-button {
+  visibility: visible;
+  cursor: pointer;
 }
