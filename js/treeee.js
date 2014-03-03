@@ -12,12 +12,14 @@ var TreeCtrl = function($scope) {
 
   $scope.addItem = function() {
     if ($scope.newContent) {
-      $scope.items.push($scope.newContent);
+      var item = {content:$scope.newContent, isBeingEdited:false};
+      $scope.items.push(item);
       $scope.newContent = "";
     }
   };
 
   $scope.startEditing = function(item) {
+    item.isBeingEdited = true;
     console.log(item);
   };
 

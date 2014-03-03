@@ -46,11 +46,18 @@
       <ul class="list-group tree" ui-sortable ng-model="items">
         <li class="list-group-item node" ng-repeat="item in items">
           <div class="row">
-            <div class="col-xs-11" ng-dblclick="startEditing(item)">
-              {{item}}
+            <div class="col-xs-11">
+              <span ng-dblclick="startEditing(item)"
+                    ng-hide="item.isBeingEdited">
+                {{item.content}}
+              </span>
+                <form class="form-inline"
+                      role="form" ng-show="item.isBeingEdited">
+                  <input type="text" class="form-control" ng-model="item.content">
+              </form>
             </div>
             <div class="col-xs-1">
-              <span class="glyphicon glyphicon-remove-circle"
+              <span class="glyphicon glyphicon-trash"
                     ng-click="removeItem($index)"></span>
             </div>
           </div>
