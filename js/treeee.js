@@ -35,7 +35,10 @@ var TreeCtrl = function($scope) {
     // convert into text
     var text = '';
     angular.forEach($scope.items, function(val, i) {
-      text += val.content + '\n';
+      text += val.content;
+      if (i < $scope.items.length - 1) {
+        text += '\n';
+      }
     });
 
     // save on local storage
@@ -46,4 +49,19 @@ var TreeCtrl = function($scope) {
   $scope.$watchCollection('items', function(newValue, oldValue) {
     $scope.save();
   });
+
+  $scope.load = function() {
+    // load from local stroage
+    var text = window.localStorage.getItem('tree');
+
+    // convert text into object
+    var items = [];
+    angular.forEach(text.split('\n'), function(line, i) {
+      items.push({'content':line, 'isBeingEdited':false});
+    });
+    return items;
+  };
+
+  // Initialization
+  $scope.items = $scope.load();
 };
