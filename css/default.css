@@ -12,11 +12,11 @@ body {
   background: #fcf8e3;
 }
 
-.trash-button {
+.hover-tool {
   visibility: hidden;
 }
 
-.item-row:hover .trash-button {
+.item-row:hover .hover-tool {
   visibility: visible;
   cursor: pointer;
 }

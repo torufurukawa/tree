@@ -12,11 +12,16 @@ var TreeCtrl = function($scope) {
 
   $scope.addItem = function() {
     if ($scope.newContent) {
-      var item = {content:$scope.newContent, isBeingEdited:false};
+      var item = {content:$scope.newContent, isBeingEdited:false, level: 0};
       $scope.items.push(item);
       $scope.newContent = '';
     }
   };
+
+  $scope.indent = function(item) {
+    item.level += 1;
+    $scope.save();
+  }
 
   $scope.startEditing = function(item) {
     item.isBeingEdited = true;
@@ -32,16 +37,16 @@ var TreeCtrl = function($scope) {
   };
 
   $scope.save = function() {
-    // convert into text
-    var text = '';
-    angular.forEach($scope.items, function(val, i) {
-      text += val.content;
-      if (i < $scope.items.length - 1) {
-        text += '\n';
-      }
+    // build object
+    var tree = [];
+    angular.forEach($scope.items, function(obj, i) {
+      var item = angular.copy(obj);
+      delete item.isBeingEdited;
+      tree.push(item);
     });
 
     // save on local storage
+    var text = JSON.stringify(tree);
     window.localStorage.setItem('tree', text);
   };
 
@@ -54,12 +59,26 @@ var TreeCtrl = function($scope) {
     // load from local stroage
     var text = window.localStorage.getItem('tree');
 
+    // return empty tree if not found
+    if (!text) {
+      return [];
+    }
+
     // convert text into object
-    var items = [];
-    angular.forEach(text.split('\n'), function(line, i) {
-      items.push({'content':line, 'isBeingEdited':false});
+    var items = JSON.parse(text);
+    angular.forEach(items, function(obj, i) {
+      obj.isBeingEdited = false;
     });
+
     return items;
+  };
+
+  $scope.range = function(num) {
+    var a = new Array();
+    for (i = 0; i < num; i++) {
+        a[i] = i;
+    };
+    return a;
   };
 
   // Initialization

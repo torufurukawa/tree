@@ -47,6 +47,11 @@
         <li class="list-group-item node row item-row" ng-repeat="item in items">
             <!-- item content -->
             <div class="col-xs-11">
+              <span class="glyphicon glyphicon-chevron-right hover-tool"
+                    ng-click="indent(item)"></span>
+
+              <span ng-repeat="i in range(item.level)">&nbsp;</span>
+
               <span ng-dblclick="startEditing(item)"
                     ng-hide="item.isBeingEdited">
                 {{item.content}}
@@ -60,7 +65,7 @@
 
             <!-- trash button -->
             <div class="col-xs-1">
-              <span class="glyphicon glyphicon-trash trash-button"
+              <span class="glyphicon glyphicon-trash hover-tool"
                     ng-click="removeItem($index)"></span>
             </div>
         </li>
