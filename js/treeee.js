@@ -26,6 +26,13 @@ var TreeCtrl = function($scope) {
     $scope.save();
   }
 
+  $scope.dedent = function(item) {
+    if (item.level > 0) {
+      item.level -= 1;
+    }
+    $scope.save();
+  }
+
   $scope.startEditing = function(item) {
     item.isBeingEdited = true;
   };

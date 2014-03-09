@@ -46,9 +46,15 @@
       <ul class="list-group tree" ui-sortable ng-model="items">
         <li class="list-group-item node row item-row" ng-repeat="item in items">
             <!-- level buttons -->
-            <div class="col-xs-1">
-              <span class="glyphicon glyphicon-chevron-right hover-tool"
-                    ng-click="indent(item)"></span>
+            <div class="col-xs-1 btn-group">
+              <button type="button" class="btn btn-default btn-xs hover-tool">
+                <span class="glyphicon glyphicon-chevron-left"
+                      ng-click="dedent(item)"></span>
+              </button>
+              <button type="button" class="btn btn-default btn-xs hover-tool">
+                <span class="glyphicon glyphicon-chevron-right"
+                      ng-click="indent(item)"></span>
+              </button>
             </div>
 
             <!-- item content -->
