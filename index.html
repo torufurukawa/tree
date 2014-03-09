@@ -81,9 +81,12 @@
       <!-- new item -->
       <ul class="list-group">
         <li class="list-group-item row">
-          <input type="text" class="form-control" autofocus
-                 ng-model="newContent" placeholder="Add new item"
-                 ui-keypress="{enter:'addItem()'}" />
+          <div class="col-xs-1"></div>
+          <div class="col-xs-{{10-items[items.length-1].level}} col-xs-offset-{{items[items.length-1].level||0}}">
+            <input type="text" class="form-control" autofocus
+                   ng-model="newContent" placeholder="Add new item"
+                   ui-keypress="{enter:'addItem()'}" />
+          </div>
         </li>
       </ul>
     </div>
