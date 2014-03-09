@@ -45,13 +45,14 @@
       <!-- items -->
       <ul class="list-group tree" ui-sortable ng-model="items">
         <li class="list-group-item node row item-row" ng-repeat="item in items">
-            <!-- item content -->
-            <div class="col-xs-11">
+            <!-- level buttons -->
+            <div class="col-xs-1">
               <span class="glyphicon glyphicon-chevron-right hover-tool"
                     ng-click="indent(item)"></span>
+            </div>
 
-              <span ng-repeat="i in range(item.level)">&nbsp;</span>
-
+            <!-- item content -->
+            <div class="col-xs-{{10-item.level}} col-xs-offset-{{item.level}}">
               <span ng-dblclick="startEditing(item)"
                     ng-hide="item.isBeingEdited">
                 {{item.content}}
