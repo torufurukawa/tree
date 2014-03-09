@@ -9,6 +9,7 @@ var TreeCtrl = function($scope) {
   $scope.items = [];
   $scope.newContent = '';
   $scope.activeNode = -1;
+  var MAX_LEVEL = 9;
 
   $scope.addItem = function() {
     if ($scope.newContent) {
@@ -19,7 +20,9 @@ var TreeCtrl = function($scope) {
   };
 
   $scope.indent = function(item) {
-    item.level += 1;
+    if (item.level < MAX_LEVEL) {
+      item.level += 1;
+    }
     $scope.save();
   }
 
