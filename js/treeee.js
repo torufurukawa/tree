@@ -13,7 +13,7 @@ var TreeCtrl = function($scope) {
 
   $scope.addItem = function() {
     if ($scope.newContent) {
-      var item = {content:$scope.newContent, isBeingEdited:false, level: 0};
+      var item = {content:$scope.newContent, isBeingEdited:false, items:[]};
       $scope.items.push(item);
       $scope.newContent = '';
     }
@@ -47,16 +47,17 @@ var TreeCtrl = function($scope) {
   };
 
   $scope.save = function() {
-    // build object
     var tree = [];
-    angular.forEach($scope.items, function(obj, i) {
-      var item = angular.copy(obj);
-      delete item.isBeingEdited;
-      tree.push(item);
-    });
 
-    // save on local storage
-    var text = JSON.stringify(tree);
+    var dump = function(items) {
+      var obj = [];
+      angular.forEach(items, function(item, index) {
+        obj.push({content:item.content, items:dump(item.items)});
+      });
+      return obj;
+    };
+
+    var text = JSON.stringify(dump($scope.items));
     window.localStorage.setItem('tree', text);
   };
 
@@ -75,20 +76,7 @@ var TreeCtrl = function($scope) {
     }
 
     // convert text into object
-    var items = JSON.parse(text);
-    angular.forEach(items, function(obj, i) {
-      obj.isBeingEdited = false;
-    });
-
-    return items;
-  };
-
-  $scope.range = function(num) {
-    var a = new Array();
-    for (i = 0; i < num; i++) {
-        a[i] = i;
-    };
-    return a;
+    return JSON.parse(text);
   };
 
   // Initialization

@@ -45,6 +45,7 @@
       <!-- items -->
       <ul class="list-group tree" ui-sortable ng-model="items">
         <li class="list-group-item node row item-row" ng-repeat="item in items">
+
             <!-- level buttons -->
             <div class="col-xs-1 btn-group">
               <button type="button" class="btn btn-default btn-xs hover-tool">
@@ -58,7 +59,7 @@
             </div>
 
             <!-- item content -->
-            <div class="col-xs-{{10-item.level}} col-xs-offset-{{item.level}}">
+            <div class="col-xs-10">
               <span ng-dblclick="startEditing(item)"
                     ng-hide="item.isBeingEdited">
                 {{item.content}}
