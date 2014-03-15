@@ -12,8 +12,6 @@ function Node(data) {
 
     this.firstChild = null;
 
-    // TODO: lastChild?
-    // TODO: nextSibling
     // TODO: previousSibling
     // TODO: parent
 
@@ -38,11 +36,17 @@ function Node(data) {
     };
 
     this.append = function(node) {
-        if (this.firstChild) {
-            // TODO
-        } else {
+        // 子ノードがなければ node を設定
+        if (!this.firstChild) {
             this.firstChild = node;
         }
+
+        // 既存の最後の子ノードから連結
+        if (this.lastChild) {
+            this.lastChild.nextSibling = node;
+        }
+
+        this.lastChild = node;
     };
 }
 
@@ -61,5 +65,15 @@ function Node(data) {
 // TODO: new を使わないコンストラクタ
 var root = new Node("root");
 root.append(new Node("goal"));
+root.append(new Node("wbs"));
+var tasks = new Node("tasks");
+root.append(tasks);
+root.append(new Node("update"));
+tasks.append(new Node("A"));
+tasks.append(new Node("B"));
+tasks.append(new Node("C"));
+tasks.append(new Node("D"));
+
+
 
 print(root.toString());
