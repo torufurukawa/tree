@@ -45,17 +45,25 @@ function TreeElement(obj) {
     };
 
     this.insertAfter = function(element) {
-        // 親を特定する
-        var parent = element.parent;
-
         // index を特定する
-        var index = parent.children.indexOf(element);
+        var index = element.parent.children.indexOf(element);
 
         // 挿入する
-        parent.children.splice(index+1, 0, this);
+        element.parent.children.splice(index+1, 0, this);
 
         // 親を参照する
-        this.parent = parent;
+        this.parent = element.parent;
+    };
+
+    this.insertBefore = function(element) {
+        // index を特定する
+        var index = element.parent.children.indexOf(element);
+
+        // 挿入する
+        element.parent.children.splice(index, 0, this);
+
+        // 親を参照する
+        this.parent = element.parent;
     };
 }
 
@@ -73,10 +81,11 @@ root.add(new TreeElement("update"));
 var A = new TreeElement("A");
 var B = new TreeElement("B");
 var C = new TreeElement("C");
+var D = new TreeElement("D");
 tasks.add(A);
 tasks.add(B);
 tasks.add(C);
-tasks.add(new TreeElement("D"));
+tasks.add(D);
 tasks.add(new TreeElement("E"));
 
 // C を削除
@@ -86,6 +95,9 @@ C.remove();
 A.remove();
 A.insertAfter(B);
 
+// D を B の前へ移動
+D.remove();
+D.insertBefore(B);
 
 // 表示
 
