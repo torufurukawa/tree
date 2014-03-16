@@ -1,79 +1,87 @@
-function indent(n) {
-    var text = "";
-    for (var i=0; i<n; i++) {
-        text += "  ";
+// TODOs
+// 要素の追加
+// 要素の削除
+// 要素間の移動
+// トラバース
+
+// メソッドリスト
+// add(element)
+// addElements(elelements)
+// addPrependChild(element)
+// clone()
+// copyTo(element)
+// getEnumerator()
+// insertAfter(element)
+// insertBefor(element)
+// moveTo(element)
+// remove()
+// removeAllChidlen()
+// removeChild(element)
+
+
+// TreeElement　クラス定義
+
+function TreeElement(obj) {
+    this.value = obj;
+    this.parent = null;
+    this.children = new Array();
+
+    this.add = function(element) {
+        element.parent = this;
+        this.children.push(element);
+    };
+}
+
+
+// テスト
+
+var root = new TreeElement("root");
+
+var tasks = new TreeElement("tasks");
+root.add(new TreeElement("goal"));
+root.add(new TreeElement("wbs"));
+root.add(tasks);
+root.add(new TreeElement("update"));
+
+tasks.add(new TreeElement("A"));
+tasks.add(new TreeElement("B"));
+tasks.add(new TreeElement("C"));
+tasks.add(new TreeElement("D"));
+tasks.add(new TreeElement("E"));
+
+
+// 表示
+
+function render(element, depth) {
+    if (!depth) {
+        depth = 0;
     }
+    var indent = "";
+    for (var i=0; i<depth; i++) {
+        indent += "  ";
+    }
+
+    // 自分自身をレンダ
+    text = indent + element.value + "\n";
+
+    // 子ノードをレンダ
+    for (var i=0; i<element.children.length; i++) {
+        text += render(element.children[i], depth+1);
+    }
+
     return text;
 }
 
 
-function Node(data) {
-    this.data = data;
-
-    this.firstChild = null;
-
-    // TODO: previousSibling
-    // TODO: parent
-
-    this.toString = function(level) {
-        if (!level) {
-            level = 0;
-        }
-
-        var text = "";
-
-        // 自分自身をレンダ
-        text += indent(level) + this.data + "\n";
-
-        // 子ノードをレンダ
-        var node = this.firstChild;
-        while (node) {
-            text += node.toString(level+1)
-            node = node.nextSibling;
-        }
-
-        return text;
-    };
-
-    this.append = function(node) {
-        // 子ノードがなければ node を設定
-        if (!this.firstChild) {
-            this.firstChild = node;
-        }
-
-        // 既存の最後の子ノードから連結
-        if (this.lastChild) {
-            this.lastChild.nextSibling = node;
-        }
-
-        this.lastChild = node;
-    };
-}
-
+print(render(root));
 
 // - root
 //   - goal
 //   - wbs
+//     - E
 //   - tasks
 //     - A
 //     - (C)
 //     - D
 //     - B
 //   - update
-
-
-// TODO: new を使わないコンストラクタ
-var root = new Node("root");
-root.append(new Node("goal"));
-root.append(new Node("wbs"));
-var tasks = new Node("tasks");
-root.append(tasks);
-root.append(new Node("update"));
-tasks.append(new Node("A"));
-tasks.append(new Node("B"));
-tasks.append(new Node("C"));
-tasks.append(new Node("D"));
-
-
-
-print(root.toString());
