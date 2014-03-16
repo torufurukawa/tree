@@ -1,12 +1,5 @@
-// TODOs
-// 要素の追加
-// 要素の削除
-// 要素間の移動
-// トラバース
-
-// メソッドリスト候補
-// append(element)
-// prepend(element)
+// TODO:
+// prepend(element)  X を先に append して、その後で prepend(E) する
 
 // TreeElement　クラス定義
 
