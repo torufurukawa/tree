@@ -5,16 +5,8 @@
 // トラバース
 
 // メソッドリスト候補
-// addElements(elelements)
-// addPrependChild(element)
-// clone()
-// copyTo(element)
-// getEnumerator()
-// insertBefor(element)
-// moveTo(element)
-// removeAllChidlen()
-// removeChild(element)
-
+// append(element)
+// prepend(element)
 
 // TreeElement　クラス定義
 
@@ -23,7 +15,7 @@ function TreeElement(obj) {
     this.parent = null;
     this.children = new Array();
 
-    this.add = function(element) {
+    this.prepend = function(element) {
         element.parent = this;
         this.children.push(element);
 
@@ -73,20 +65,20 @@ function TreeElement(obj) {
 var root = new TreeElement("root");
 
 var tasks = new TreeElement("tasks");
-root.add(new TreeElement("goal"));
-root.add(new TreeElement("wbs"));
-root.add(tasks);
-root.add(new TreeElement("update"));
+root.prepend(new TreeElement("goal"));
+root.prepend(new TreeElement("wbs"));
+root.prepend(tasks);
+root.prepend(new TreeElement("update"));
 
 var A = new TreeElement("A");
 var B = new TreeElement("B");
 var C = new TreeElement("C");
 var D = new TreeElement("D");
-tasks.add(A);
-tasks.add(B);
-tasks.add(C);
-tasks.add(D);
-tasks.add(new TreeElement("E"));
+tasks.prepend(A);
+tasks.prepend(B);
+tasks.prepend(C);
+tasks.prepend(D);
+tasks.prepend(new TreeElement("E"));
 
 // C を削除
 C.remove();
@@ -128,6 +120,7 @@ print(render(root));
 //   - goal
 //   - wbs
 //     - E
+//     - X
 //   - tasks
 //     - (C)
 //     - D
