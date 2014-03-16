@@ -50,6 +50,12 @@ function TreeElement(obj) {
         // 親を参照する
         this.parent = element.parent;
     };
+
+    this.getPrevSibling = function() {
+        for (var i=0; i<this.parent.children.length; i++) {
+            // ここから
+        }
+    };
 }
 
 
@@ -118,6 +124,9 @@ function render(element, depth) {
 
 
 print(render(root));
+
+print(B.getPrevSibling().value);  // D
+print(B.getNextSibling().value);  // A
 
 // - root
 //   - goal
