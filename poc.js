@@ -1,19 +1,19 @@
-// TODO:
-// prepend(element)  X を先に append して、その後で prepend(E) する
-
-// TreeElement　クラス定義
+// TreeElement クラス定義
 
 function TreeElement(obj) {
     this.value = obj;
     this.parent = null;
     this.children = new Array();
 
-    this.prepend = function(element) {
+    this.append = function(element) {
         element.parent = this;
         this.children.push(element);
-
-        print(element.parent.value + "->" + element.value);
     };
+
+    this.prepend = function(element) {
+        element.parent = this;
+        this.children.unshift(element);
+    }
 
     this.remove = function() {
         // 親ノードが自分を参照していなければエラー
@@ -58,20 +58,26 @@ function TreeElement(obj) {
 var root = new TreeElement("root");
 
 var tasks = new TreeElement("tasks");
-root.prepend(new TreeElement("goal"));
-root.prepend(new TreeElement("wbs"));
-root.prepend(tasks);
-root.prepend(new TreeElement("update"));
+var wbs = new TreeElement("wbs");
+root.append(new TreeElement("goal"));
+root.append(wbs);
+root.append(tasks);
+root.append(new TreeElement("update"));
 
 var A = new TreeElement("A");
 var B = new TreeElement("B");
 var C = new TreeElement("C");
 var D = new TreeElement("D");
-tasks.prepend(A);
-tasks.prepend(B);
-tasks.prepend(C);
-tasks.prepend(D);
-tasks.prepend(new TreeElement("E"));
+var E = new TreeElement("E");
+tasks.append(A);
+tasks.append(B);
+tasks.append(C);
+tasks.append(D);
+tasks.append(E);
+
+var X = new TreeElement("X");
+wbs.append(X)
+
 
 // C を削除
 C.remove();
@@ -83,6 +89,10 @@ A.insertAfter(B);
 // D を B の前へ移動
 D.remove();
 D.insertBefore(B);
+
+// E を wbs の先頭へ移動
+E.remove();
+wbs.prepend(E);
 
 // 表示
 
