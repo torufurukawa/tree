@@ -29,6 +29,22 @@ function TreeElement(obj) {
     this.add = function(element) {
         element.parent = this;
         this.children.push(element);
+
+        print(element.parent.value + "->" + element.value);
+    };
+
+    this.remove = function() {
+        // 親ノードが自分を参照していなければエラー
+        var index = this.parent.children.indexOf(this);
+        if (index==-1) {
+            throw "Unexpeced Error: element does not belong to parent";
+        }
+
+        // 親ノードから自分を削除
+        this.parent.children.splice(index, 1);
+
+        // 親ノードへの参照を削除
+        this.parent = null;
     };
 }
 
@@ -49,6 +65,9 @@ tasks.add(new TreeElement("B"));
 tasks.add(C);
 tasks.add(new TreeElement("D"));
 tasks.add(new TreeElement("E"));
+
+// C を削除
+C.remove();
 
 
 // 表示
