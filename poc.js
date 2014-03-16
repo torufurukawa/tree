@@ -43,9 +43,10 @@ root.add(new TreeElement("wbs"));
 root.add(tasks);
 root.add(new TreeElement("update"));
 
+var C = new TreeElement("C");
 tasks.add(new TreeElement("A"));
 tasks.add(new TreeElement("B"));
-tasks.add(new TreeElement("C"));
+tasks.add(C);
 tasks.add(new TreeElement("D"));
 tasks.add(new TreeElement("E"));
 
