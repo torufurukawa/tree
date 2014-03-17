@@ -29,10 +29,10 @@ var TreeCtrl = function($scope) {
   }
 
   $scope.startEditing = function(item) {
-    item.isBeingEdited = true;
+    item.value.isBeingEdited = true;
   };
 
   $scope.finishEditing = function(item) {
-    item.isBeingEdited = false;
+    item.value.isBeingEdited = false;
   };
 };
