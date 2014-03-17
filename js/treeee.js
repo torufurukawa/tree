@@ -8,8 +8,6 @@ var app = angular.module('app', ['ui.keypress', 'ui.sortable']);
 var TreeCtrl = function($scope) {
   $scope.items = new TreeElement(null);
   $scope.newContent = '';
-  $scope.activeNode = -1;
-  var MAX_LEVEL = 9;
 
   $scope.addItem = function() {
     if ($scope.newContent) {
@@ -25,15 +23,9 @@ var TreeCtrl = function($scope) {
   };
 
   $scope.indent = function(item) {
-    if (item.level < MAX_LEVEL) {
-      item.level += 1;
-    }
   }
 
   $scope.dedent = function(item) {
-    if (item.level > 0) {
-      item.level -= 1;
-    }
   }
 
   $scope.startEditing = function(item) {
