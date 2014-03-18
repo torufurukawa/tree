@@ -21,6 +21,28 @@ var TreeCtrl = function($scope) {
   $scope.removeItem = function(item) {
     item.remove();
   };
+
+  $scope.indent = function(item) {
+  };
+
+  $scope.dedent = function(item) {
+  };
+
+  $scope.save = function() {
+    // TODO: convert tree into object
+    var obj = [];
+
+    // stringify
+    var data = angular.fromJson(obj);
+    console.log(data);
+
+    // TODO: save in localstorage
+  };
+
+  // TODO: items に変更があったら save が呼び出されるようにする
+  $scope.$watchCollection('items', function(newValue, oldValue) {
+    console.log(newValue);
+  });
 };
 
 
@@ -32,4 +54,6 @@ var ValueCtrl = function($scope) {
   $scope.finishEditing = function(value) {
     value.isBeingEdited = false;
   };
+
+  // TODO: items に変更があったら save が呼び出されるようにする
 };
