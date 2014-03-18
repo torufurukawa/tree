@@ -28,15 +28,15 @@ var TreeCtrl = function($scope) {
   $scope.dedent = function(item) {
   }
 
-  $scope.startEditing = function(item) {
-    item.value.isBeingEdited = true;
-  };
-
-  $scope.finishEditing = function(item) {
-    item.value.isBeingEdited = false;
-  };
 };
 
 
 var ValueCtrl = function($scope) {
+  $scope.startEditing = function(value) {
+    value.isBeingEdited = true;
+  };
+
+  $scope.finishEditing = function(value) {
+    value.isBeingEdited = false;
+  };
 };

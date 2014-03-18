@@ -13,7 +13,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
 
-    <!-- Angular -->
+    <!-- AngularJS -->
     <script src="js/angular.min.js"></script>
     <script src="js/ui-utils.js"></script>
     <script src="js/event.js"></script>
@@ -61,15 +61,16 @@
             </div>
 
             <!-- item value -->
-            <div class="col-xs-10" ng-controller="ValueCtrl" ng-model="item.value">
-              <span ng-dblclick="startEditing(item)"
+            <div class="col-xs-10"
+                 ng-controller="ValueCtrl" ng-init="value=item.value">
+              <span ng-dblclick="startEditing(value)"
                     ng-hide="item.value.isBeingEdited">
                 {{item.value.content}}
               </span>
               <form role="form" ng-show="item.value.isBeingEdited">
                 <input type="text" class="form-control"
-                       ng-model="item.value.content"
-                       ui-keypress="{enter:'finishEditing(item)'}">
+                       ng-model="value.content"
+                       ui-keypress="{enter:'finishEditing(value)'}">
               </form>
             </div>
 
