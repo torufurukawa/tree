@@ -21,13 +21,6 @@ var TreeCtrl = function($scope) {
   $scope.removeItem = function(item) {
     item.remove();
   };
-
-  $scope.indent = function(item) {
-  }
-
-  $scope.dedent = function(item) {
-  }
-
 };
 
 
