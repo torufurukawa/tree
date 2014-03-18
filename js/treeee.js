@@ -3,7 +3,7 @@
 var app = angular.module('app', ['ui.keypress', 'ui.sortable']);
 
 
-// Controller
+// Controllers
 
 var TreeCtrl = function($scope) {
   $scope.items = new TreeElement(null);
@@ -35,4 +35,8 @@ var TreeCtrl = function($scope) {
   $scope.finishEditing = function(item) {
     item.value.isBeingEdited = false;
   };
+};
+
+
+var ValueCtrl = function($scope) {
 };

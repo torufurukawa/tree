@@ -60,8 +60,8 @@
               </button>
             </div>
 
-            <!-- item content -->
-            <div class="col-xs-10">
+            <!-- item value -->
+            <div class="col-xs-10" ng-controller="ValueCtrl" ng-model="item.value">
               <span ng-dblclick="startEditing(item)"
                     ng-hide="item.value.isBeingEdited">
                 {{item.value.content}}
