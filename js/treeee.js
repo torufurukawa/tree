@@ -29,6 +29,7 @@ var TreeCtrl = function($scope) {
   };
 
   $scope.save = function() {
+    console.log($scope.items);
     // TODO: convert tree into object
     var obj = [];
 
@@ -37,6 +38,14 @@ var TreeCtrl = function($scope) {
     console.log(data);
 
     // TODO: save in localstorage
+  };
+
+  /**
+   * Notify change from child controllers.
+   * This function is to be called by child controllers when changes occurs.
+   */
+  $scope.notify = function() {
+    $scope.save();
   };
 
 };
@@ -51,7 +60,6 @@ var ValueCtrl = function($scope) {
 
   $scope.finishEditing = function() {
     $scope.isBeingEdited = false;
+    $scope.$parent.notify();
   };
-
-  // TODO: items に変更があったら save が呼び出されるようにする
 };
