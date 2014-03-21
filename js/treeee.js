@@ -47,12 +47,14 @@ var TreeCtrl = function($scope) {
 
 
 var ValueCtrl = function($scope) {
+  $scope.isBeingEdited = false;
+
   $scope.startEditing = function(value) {
-    value.isBeingEdited = true;
+    $scope.isBeingEdited = true;
   };
 
   $scope.finishEditing = function(value) {
-    value.isBeingEdited = false;
+    $scope.isBeingEdited = false;
   };
 
   // TODO: items に変更があったら save が呼び出されるようにする

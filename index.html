@@ -64,10 +64,10 @@
             <div class="col-xs-10"
                  ng-controller="ValueCtrl" ng-init="value=item.value">
               <span ng-dblclick="startEditing(value)"
-                    ng-hide="item.value.isBeingEdited">
-                {{item.value.content}}
+                    ng-hide="isBeingEdited">
+                {{value.content}}
               </span>
-              <form role="form" ng-show="item.value.isBeingEdited">
+              <form role="form" ng-show="isBeingEdited">
                 <input type="text" class="form-control"
                        ng-model="value.content"
                        ui-keypress="{enter:'finishEditing(value)'}">
