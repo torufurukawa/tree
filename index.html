@@ -63,14 +63,14 @@
             <!-- item value -->
             <div class="col-xs-10"
                  ng-controller="ValueCtrl" ng-init="value=item.value">
-              <span ng-dblclick="startEditing(value)"
+              <span ng-dblclick="startEditing()"
                     ng-hide="isBeingEdited">
                 {{value.content}}
               </span>
               <form role="form" ng-show="isBeingEdited">
                 <input type="text" class="form-control"
                        ng-model="value.content"
-                       ui-keypress="{enter:'finishEditing(value)'}">
+                       ui-keypress="{enter:'finishEditing()'}">
               </form>
             </div>
 
