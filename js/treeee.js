@@ -37,11 +37,13 @@ var TreeCtrl = function($scope) {
       var item = new TreeElement(value);
       $scope.items.append(item);
       $scope.newContent = '';
+      $scope.notify();
     }
   };
 
   $scope.removeItem = function(item) {
     item.remove();
+    $scope.notify();
   };
 
   $scope.indent = function(item) {
@@ -51,15 +53,22 @@ var TreeCtrl = function($scope) {
   };
 
   $scope.save = function() {
-    console.log($scope.items);
-    // TODO: convert tree into object
-    var obj = [];
+    var obj = $scope.elementTreeToObject($scope.items);
+    var text = angular.toJson(obj);
+    window.localStorage.setItem('tree', text);
+  };
 
-    // stringify
-    var data = angular.fromJson(obj);
-    console.log(data);
+  $scope.load = function() {
+    var text = window.localStorage.getItem('tree');
 
-    // TODO: save in localstorage
+    // localStorage に保存されていなければ何もしない
+    if (!text) {
+      return;
+    }
+
+    var obj = angular.fromJson(text);
+    var tree = $scope.objectToTreeElement(obj);
+    $scope.items = tree;
   };
 
   /**
@@ -69,6 +78,33 @@ var TreeCtrl = function($scope) {
   $scope.notify = function() {
     $scope.save();
   };
+
+
+  /**
+   * Convert tree element into an object
+   */
+  $scope.elementTreeToObject = function(element) {
+    var children = [];
+    angular.forEach(element.children, function(child, i) {
+      children.push($scope.elementTreeToObject(child));
+    });
+    return {'value': element.value, 'children': children};
+  };
+
+  /**
+   * Convert object into a tree element
+   */
+  $scope.objectToTreeElement = function(obj) {
+    var element = new TreeElement(obj.value);
+    angular.forEach(obj.children, function(child, i) {
+      element.append($scope.objectToTreeElement(child));
+    });
+    return element;
+  }
+
+  $scope.initialize = function() {
+    $scope.load();
+  }
 
 };
 
