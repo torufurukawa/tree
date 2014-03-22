@@ -64,11 +64,12 @@
             <div class="col-xs-10"
                  ng-controller="ValueCtrl" ng-init="value=item.value">
               <span ng-dblclick="startEditing(value)"
-                    ng-hide="item.value.isBeingEdited">
+                    ng-hide="value.isBeingEdited">
                 {{item.value.content}}
               </span>
-              <form role="form" ng-show="item.value.isBeingEdited">
+              <form role="form" ng-show="value.isBeingEdited">
                 <input type="text" class="form-control"
+                       sync-focus-with="value.isBeingEdited"
                        ng-model="value.content"
                        ui-keypress="{enter:'finishEditing(value)'}">
               </form>
@@ -81,6 +82,8 @@
             </div>
         </li>
       </ul>
+
+      <div>{{latestFocus|json}}</div>
 
       <!-- new item -->
       <ul class="list-group">
