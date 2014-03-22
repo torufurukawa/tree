@@ -33,7 +33,7 @@ var TreeCtrl = function($scope) {
 
   $scope.addItem = function() {
     if ($scope.newContent) {
-      var value = {content:$scope.newContent, isBeingEdited:false};
+      var value = {content:$scope.newContent};
       var item = new TreeElement(value);
       $scope.items.append(item);
       $scope.newContent = '';
@@ -51,6 +51,7 @@ var TreeCtrl = function($scope) {
   };
 
   $scope.save = function() {
+    console.log($scope.items);
     // TODO: convert tree into object
     var obj = [];
 
@@ -61,21 +62,26 @@ var TreeCtrl = function($scope) {
     // TODO: save in localstorage
   };
 
-  // TODO: items に変更があったら save が呼び出されるようにする
-  $scope.$watchCollection('items', function(newValue, oldValue) {
-    console.log(newValue);
-  });
+  /**
+   * Notify change from child controllers.
+   * This function is to be called by child controllers when changes occurs.
+   */
+  $scope.notify = function() {
+    $scope.save();
+  };
+
 };
 
 
 var ValueCtrl = function($scope) {
-  $scope.startEditing = function(value) {
-    value.isBeingEdited = true;
+  $scope.isBeingEdited = false;
+
+  $scope.startEditing = function() {
+    $scope.isBeingEdited = true;
   };
 
-  $scope.finishEditing = function(value) {
-    value.isBeingEdited = false;
+  $scope.finishEditing = function() {
+    $scope.isBeingEdited = false;
+    $scope.$parent.notify();
   };
-
-  // TODO: items に変更があったら save が呼び出されるようにする
 };
