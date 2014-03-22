@@ -61,7 +61,7 @@ var TreeCtrl = function($scope) {
   $scope.load = function() {
     var text = window.localStorage.getItem('tree');
 
-    // localStorage に保存されていなければ何もしない
+    // Quit if localStorage has nothing
     if (!text) {
       return;
     }
